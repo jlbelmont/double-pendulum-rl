@@ -1,0 +1,46 @@
+# conf/training.yaml -- Training hyperparameters
+# These defaults work well for the double pendulum.
+# See docs/extending_to_triple.md for triple pendulum changes.
+
+# --- Curriculum ---
+stage_1_steps: 300000      # Steps in swing-up phase before switching to balance
+stage_1_noise: 0.2         # Angle noise at reset in Stage 1 (rad)
+stage_2_noise: 0.2         # Angle noise at reset in Stage 2 (rad)
+episode_length: 1000       # Max steps per episode (5 seconds at 200Hz)
+
+# --- SAC hyperparameters ---
+hidden_dims: [256, 256]    # Network hidden layer sizes
+actor_lr: 0.0003
+critic_lr: 0.0003
+alpha_lr: 0.0003
+gamma: 0.99                # Discount factor
+tau: 0.005                 # Soft target update rate
+init_alpha: 0.2            # Initial entropy temperature
+replay_capacity: 1000000   # Replay buffer size (transitions)
+batch_size: 256
+warmup_steps: 5000         # Steps before first network update
+
+# --- Training schedule ---
+total_steps: 2000000       # Total environment steps (increase for harder tasks)
+log_interval: 25           # Print progress every N episodes
+checkpoint_interval: 5000  # Save checkpoint every N episodes
+
+# --- Domain randomization (for sim-to-real) ---
+dr_enabled: true
+dr_warmup_steps: 500000    # Steps before DR kicks in
+dr_cart_mass: 0.10         # +/- 10% cart mass
+dr_link_mass: 0.10         # +/- 10% link masses
+dr_link_length: 0.05       # +/- 5% link lengths
+dr_gravity: 0.01           # +/- 1% gravity
+dr_force_scale: 0.15       # +/- 15% force (motor variation)
+dr_dt_jitter: 0.10         # +/- 10% timestep (scheduling noise)
+
+# --- Sensor noise ---
+sensor_noise_enabled: true
+encoder_bits: 14
+velocity_from_finite_diff: true
+observation_delay_steps: 0
+
+# --- Misc ---
+seed: 42
+device: auto               # auto / cpu / cuda / mps

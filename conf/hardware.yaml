@@ -1,0 +1,36 @@
+# conf/hardware.yaml -- Physical parameters from the spec sheet
+# Edit these if your hardware differs from the measured values below.
+
+# --- Cart ---
+cart_mass: 0.909           # kg
+
+# --- Link 1 (lower pendulum, attached to cart) ---
+link_1_total_length: 0.25  # m  (pivot to next pivot)
+link_1_mass: 0.238         # kg
+link_1_cm_distance: 0.109  # m  (pivot to center of mass)
+link_1_inertia_cm: 0.0020388696  # kg*m^2 (about link's own CM)
+
+# --- Link 2 (upper pendulum, attached to link 1 tip) ---
+link_2_total_length: 0.20  # m
+link_2_mass: 0.148         # kg
+link_2_cm_distance: 0.068  # m
+link_2_inertia_cm: 0.00094102171  # kg*m^2
+
+# --- Track and actuator ---
+track_length: 0.8382       # m  (total track)
+x_threshold: 0.4191        # m  (half track = soft limit)
+force_limit: 5.0           # N  (+/- max force)
+
+# --- Control loop ---
+control_hz: 200            # Hz
+dt: 0.005                  # s  (= 1/200)
+
+# --- Encoder ---
+encoder_bits: 14           # 16383 counts/revolution
+encoder_correction_1: 4967 # Calibrate on your hardware
+encoder_correction_2: 7485 # Calibrate on your hardware
+
+# --- Serial ---
+baud_esp32: 921600         # Encoder ESP32 baud rate
+baud_arduino: 115200       # Motor Arduino baud rate
+steps_per_meter: 10029.6   # Stepper steps/m (6400 / 0.638175)

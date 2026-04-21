@@ -1,0 +1,13 @@
+results/
+deploy_output/
+__pycache__/
+*.py[cod]
+*.pt
+*.pth
+*.log
+.DS_Store
+*.egg-info/
+dist/
+build/
+.venv/
+pendulum_env/
